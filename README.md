@@ -1,2 +1,2 @@
 # java-telegram-bot-template
-Шаблон для работы с телеграмм ботами на Java Spring
+Шаблон для работы с ботами телеграмм на Java Spring
