@@ -10,12 +10,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public abstract class MessageActionStrategy {
+public abstract class MessageAction {
 
     protected AnswerService answerService;
     protected Set<String> commands = new HashSet<>();
 
-    public MessageActionStrategy(){
+    public MessageAction(){
         setCommands();
     }
 

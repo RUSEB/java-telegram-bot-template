@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.template.general.answer.service.AnswerService;
 import ru.template.general.answer.type.Answer;
+import ru.template.general.bot.action.message.MessageAction;
 import ru.template.general.bot.action.message.MessageActionFactory;
-import ru.template.general.bot.action.message.MessageActionStrategy;
 
 @Component
 @Log4j2
@@ -20,7 +20,7 @@ public class MessageDistributor extends Distributor{
     @Override
     public Answer distribute(Update update) {
         String command = update.getMessage().getText();
-        MessageActionStrategy action = messageActionFactory.getStrategy(command);
+        MessageAction action = messageActionFactory.getStrategy(command);
         return action.getAnswer(update);
     }
 

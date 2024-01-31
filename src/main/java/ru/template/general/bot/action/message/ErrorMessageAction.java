@@ -9,7 +9,7 @@ import ru.template.general.answer.type.Answer;
 @Component
 @Scope("prototype")
 @Setter
-public class ErrorMessageAction extends MessageActionStrategy{
+public class ErrorMessageAction extends MessageAction{
 
     private String errorText;
     @Override

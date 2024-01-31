@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 @Log4j2
 public class MessageActionFactory {
-    List<MessageActionStrategy> messageActionStrategies;
+    List<MessageAction> messageActions;
 
     private ApplicationContext applicationContext;
 
@@ -21,28 +21,26 @@ public class MessageActionFactory {
     }
 
     @Autowired
-    public void setMessageActionStrategies(List<MessageActionStrategy> messageActionStrategies){
-        this.messageActionStrategies = messageActionStrategies;
+    public void setMessageActionStrategies(List<MessageAction> messageActionStrategies){
+        this.messageActions = messageActionStrategies;
     }
-    public MessageActionStrategy getStrategy(String command) {
+    public MessageAction getStrategy(String command) {
         boolean strategyFound = false;
-        MessageActionStrategy resultStrategy = NullMessageAction.get();
-        for (MessageActionStrategy messageActionStrategy:messageActionStrategies){
-            if(!strategyFound&&messageActionStrategy.hasCommand(command)){
-                resultStrategy = messageActionStrategy;
+        MessageAction resultStrategy = defaultMessageAction();
+        for (MessageAction messageAction:messageActions){
+            if(!strategyFound&&messageAction.hasCommand(command)){
+                resultStrategy = messageAction;
                 strategyFound = true;
-            } else if (strategyFound&&messageActionStrategy.hasCommand(command)) {
-                String errorText = buildError(resultStrategy,messageActionStrategy);
-                ErrorMessageAction errorMessageAction = applicationContext.getBean(ErrorMessageAction.class);
-                errorMessageAction.setErrorText(errorText);
-                return errorMessageAction;
+            } else if (strategyFound&&messageAction.hasCommand(command)) {
+                String errorText = buildError(resultStrategy,messageAction);
+                return errorMessageAction(errorText);
             }
         }
         return resultStrategy;
     }
 
 
-    private String buildError(MessageActionStrategy first,MessageActionStrategy second){
+    private String buildError(MessageAction first,MessageAction second){
         StringBuilder identicalCommands = new StringBuilder();
         identicalCommands.append("Error: Identical commands found in ")
                          .append(first.getClass()).append(" and ").append(second.getClass())
@@ -54,5 +52,15 @@ public class MessageActionFactory {
                     identicalCommands.append(s).append(", ");
                 });
         return identicalCommands.delete(identicalCommands.length() - 2, identicalCommands.length()).append(".").toString();
+    }
+
+    private ErrorMessageAction errorMessageAction(String errorText){
+        ErrorMessageAction errorMessageAction = applicationContext.getBean(ErrorMessageAction.class);
+        errorMessageAction.setErrorText(errorText);
+        return errorMessageAction;
+    }
+
+    private DefaultMessageAction defaultMessageAction(){
+        return applicationContext.getBean(DefaultMessageAction.class);
     }
 }
