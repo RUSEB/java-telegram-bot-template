@@ -14,6 +14,10 @@ public class DefaultAnswer extends Answer{
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(text);
         sendMessage.setChatId(chatId);
+        sendMessage.enableMarkdown(markdownNeeded);
+        if(hasInlineKeyboardMarkup()){
+            sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+        }
         telegramBot.execute(sendMessage);
     }
 }
