@@ -15,6 +15,12 @@ public class ErrorMessageAction extends MessageAction{
     @Override
     protected void setCommands() {
     }
+
+    @Override
+    protected void setStates() {
+
+    }
+
     @Override
     protected Answer buildAnswer(Update update) {
         return getErrorAnswer();

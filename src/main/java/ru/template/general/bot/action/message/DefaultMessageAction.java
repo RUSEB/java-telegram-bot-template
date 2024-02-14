@@ -13,13 +13,18 @@ public class DefaultMessageAction extends MessageAction {
     }
 
     @Override
+    protected void setStates() {
+
+    }
+
+    @Override
     protected Answer buildAnswer(Update update) {
         return defaultAnswer(update);
     }
 
 
     private Answer defaultAnswer(Update update){
-        Long chatId = update.getMessage().getChatId();
-        return answerService.getDefaultAnswer(chatId);
+        Long telegramId = telegramIdByUpdateService.get(update);
+        return answerService.getDefaultAnswer(telegramId);
     }
 }

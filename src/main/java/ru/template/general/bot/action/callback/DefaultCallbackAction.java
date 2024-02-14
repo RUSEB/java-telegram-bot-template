@@ -17,7 +17,7 @@ public class DefaultCallbackAction extends CallbackAction{
     }
 
     private Answer defalutAnswer(Update update){
-        Long chatId = update.getCallbackQuery().getFrom().getId();
-        return answerService.getDefaultAnswer(chatId);
+        Long telegramId = telegramIdByUpdateService.get(update);
+        return answerService.getDefaultAnswer(telegramId);
     }
 }
