@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.template.general.bot.TelegramBot;
 
@@ -26,6 +27,11 @@ public class PhotoAnswer extends Answer{
         }
         if(hasInlineKeyboardMarkup()){
             sendPhoto.setReplyMarkup(inlineKeyboardMarkup);
+        }else {
+            sendPhoto.setReplyMarkup(new ReplyKeyboardRemove(true));
+        }
+        if(hasReplyKeyboardMarkup()){
+            sendPhoto.setReplyMarkup(replyKeyboardMarkup);
         }
         telegramBot.execute(sendPhoto);
     }
