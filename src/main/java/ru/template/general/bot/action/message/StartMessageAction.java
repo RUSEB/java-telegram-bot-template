@@ -13,6 +13,11 @@ public class StartMessageAction extends MessageAction{
     }
 
     @Override
+    protected void setStates() {
+
+    }
+
+    @Override
     protected Answer buildAnswer(Update update) {
         return answerService.getMessage(update.getMessage().getChatId(),"Была введена команда /start");
     }
