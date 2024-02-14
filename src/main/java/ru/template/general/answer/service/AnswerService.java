@@ -7,17 +7,21 @@ import ru.template.general.answer.type.*;
 
 @Service
 public class AnswerService{
-    public Answer getMessage(Long chatId,String message){
-        return new MessageAnswer(chatId,message);
+    public Answer getMessage(Long telegramId,String message){
+        return new MessageAnswer(telegramId,message);
     }
 
     public Answer getErrorAnswer(String error){
         return new ErrorAnswer(error);
     }
-    public Answer getDefaultAnswer(Long chatId){
-        return new DefaultAnswer(chatId);
+    public Answer getDefaultAnswer(Long telegramId){
+        return new DefaultAnswer(telegramId);
     }
-    public Answer getPhoto(Long chatId, String text, InputFile photo){
-        return new PhotoAnswer(chatId,text,photo);
+
+    public Answer getEmptyAnswer(Long telegramId){
+        return new EmptyAnswer(telegramId);
+    }
+    public Answer getPhoto(Long telegramId, String text, InputFile photo){
+        return new PhotoAnswer(telegramId,text,photo);
     }
 }
