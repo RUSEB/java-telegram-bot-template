@@ -13,8 +13,7 @@ import ru.template.general.bot.action.message.MessageActionFactory;
 public class MessageDistributor extends Distributor{
     private final MessageActionFactory messageActionFactory;
 
-    public MessageDistributor(AnswerService answerService, MessageActionFactory messageActionFactory) {
-        super(answerService);
+    public MessageDistributor(MessageActionFactory messageActionFactory) {
         this.messageActionFactory = messageActionFactory;
     }
     @Override

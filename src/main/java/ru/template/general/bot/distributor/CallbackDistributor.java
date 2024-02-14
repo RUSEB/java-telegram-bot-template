@@ -18,9 +18,6 @@ public class CallbackDistributor extends Distributor{
     public void setCallbackActionFactory(CallbackActionFactory callbackActionFactory){
         this.callbackActionFactory = callbackActionFactory;
     }
-    public CallbackDistributor(AnswerService answerService) {
-        super(answerService);
-    }
 
     @Override
     public Answer distribute(Update update) {
