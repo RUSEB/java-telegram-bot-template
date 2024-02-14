@@ -11,10 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
         "ru.template",
         "org.telegram.telegrambots"
 })
-public class TelegramBotTemplateApplication {
+public class StartApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TelegramBotTemplateApplication.class, args);
+        SpringApplication.run(StartApplication.class, args);
     }
 
 }
